@@ -3,275 +3,264 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Projeto Bolo de Pote — Bolo para Toda a Vida</title>
-
-  <!-- Fonte -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
-
+  <title>delicios cakes — Bolo de Pote</title>
   <style>
     :root{
-      --purple-1: #4b0076;
-      --purple-2: #6f2dbd;
-      --accent: #ffd166;
-      --glass: rgba(255,255,255,0.06);
-      --text: #ffffff;
+      --bg1:#4b0073; /* roxo escuro */
+      --bg2:#7b2cbf; /* roxo médio */
+      --glass: rgba(255,255,255,0.08);
+      --accent: #ffd7e2;
+      --card-shadow: 0 8px 30px rgba(0,0,0,0.45);
+      --radius: 16px;
     }
-
-    *{box-sizing: border-box}
-    html,body{height:100%;margin:0;font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;}
-
-    /* Fundo roxo com brilho */
-    body{
-      background: radial-gradient(1200px 600px at 10% 10%, rgba(255,255,255,0.03), transparent 10%),
-                  radial-gradient(1000px 500px at 90% 90%, rgba(0,0,0,0.08), transparent 10%),
-                  linear-gradient(135deg, var(--purple-1), var(--purple-2));
-      color:var(--text);
+    *{box-sizing:border-box}
+    html,body{
+      height:100%;
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+      background: linear-gradient(135deg,var(--bg1),var(--bg2));
+      color: #fff;
       -webkit-font-smoothing:antialiased;
       -moz-osx-font-smoothing:grayscale;
+    }
+    /* Página em tela cheia (100vh) */
+    .app{
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:flex-start;
       padding:32px;
+      gap:24px;
+    }
+    header{
+      width:100%;
+      max-width:1200px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:16px;
+    }
+    .logo{
+      width:72px;height:72px;
+      background:linear-gradient(180deg, rgba(255,255,255,0.15), rgba(255,255,255,0.06));
+      border-radius:14px;
       display:flex;
       align-items:center;
       justify-content:center;
-      min-height:100vh;
+      box-shadow: var(--card-shadow);
+      flex-shrink:0;
+    }
+    .logo svg{width:52px;height:52px}
+    h1{font-size:36px;line-height:1;margin:0;text-transform:capitalize;letter-spacing:0.6px}
+    p.lead{margin:0;color:rgba(255,255,255,0.9);opacity:0.95}
+
+    .controls{display:flex;gap:12px;align-items:center}
+    button{
+      background:transparent;
+      color:var(--accent);
+      border:1px solid rgba(255,255,255,0.12);
+      padding:10px 16px;
+      border-radius:12px;
+      font-weight:600;
+      cursor:pointer;
+      backdrop-filter: blur(6px);
+    }
+    button.primary{
+      background:linear-gradient(90deg,#ffd7e2, rgba(255,255,255,0.08));
+      color:#3b0033;
+      border:none;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.35);
     }
 
-    /* Container central */
-    .card{
+    main{
       width:100%;
-      max-width:1100px;
-      border-radius:18px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      box-shadow: 0 8px 30px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.02);
-      padding:28px;
-      backdrop-filter: blur(6px) saturate(120%);
-      border: 1px solid rgba(255,255,255,0.04);
+      max-width:1200px;
+      display:grid;
+      grid-template-columns: 1fr 380px;
+      gap:28px;
+      align-items:start;
+      margin-top:8px;
     }
-
-    header{
-      display:flex;gap:24px;align-items:center;justify-content:space-between;margin-bottom:18px;
-    }
-
-    .brand{
-      display:flex;gap:16px;align-items:center;
-    }
-
-    .logo{
-      width:72px;height:72px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#ff9a9a);display:flex;align-items:center;justify-content:center;color:#331a00;font-weight:800;font-family:'Roboto Slab', serif;font-size:18px;box-shadow:0 6px 18px rgba(0,0,0,0.35);
-    }
-
-    h1{font-family:'Roboto Slab', serif;margin:0;font-size:28px;letter-spacing:-0.5px}
-    p.lead{margin:0;opacity:0.95}
-
-    nav{display:flex;gap:10px;align-items:center}
-    .btn{background:var(--accent);color:#2a1a00;padding:10px 16px;border-radius:12px;text-decoration:none;font-weight:700;box-shadow:0 6px 18px rgba(0,0,0,0.2);}
-
-    main{display:grid;grid-template-columns: 1fr 360px;gap:20px;margin-top:12px}
-
-    /* Coluna principal */
     .hero{
-      padding:22px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.03));box-shadow:inset 0 1px 0 rgba(255,255,255,0.02);
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+      border-radius: var(--radius);
+      padding:28px;
+      box-shadow: var(--card-shadow);
     }
-
-    .hero h2{font-size:24px;margin:6px 0 12px}
-    .grid-flavors{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px}
-
-    .flavor{
-      padding:12px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      border:1px solid rgba(255,255,255,0.03);text-align:center;
+    .hero h2{font-size:28px;margin:0 0 8px}
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(auto-fill,minmax(220px,1fr));
+      gap:18px;
+      margin-top:18px;
     }
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:14px;
+      padding:14px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+      min-height:220px;
+    }
+    .jar{
+      width:100%;height:110px;display:flex;align-items:center;justify-content:center;
+    }
+    .card h3{margin:0;font-size:18px}
+    .price{font-weight:800;font-size:18px;color:var(--accent)}
+    .description{font-size:13px;color:rgba(255,255,255,0.85)}
 
-    .flavor h3{margin:6px 0 4px;font-size:16px}
-    .flavor p{margin:0;font-size:13px;opacity:0.9}
+    .sidebar{
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+      border-radius:14px;padding:20px;box-shadow: var(--card-shadow);
+      height:100%;
+    }
+    .cta{display:flex;flex-direction:column;gap:12px}
+    .hero small{color:rgba(255,255,255,0.8)}
 
-    .price{margin-top:10px;font-weight:800;font-size:18px}
-
-    /* Sidebar */
-    .sidebar{padding:18px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.015), rgba(0,0,0,0.025));}
-
-    .order-box{padding:14px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);}
-    label{display:block;margin-top:10px;font-size:13px;opacity:0.95}
-    input[type="text"], input[type="tel"], textarea, select{width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:var(--text);margin-top:6px}
-
-    textarea{min-height:90px;resize:vertical}
-    .buy{display:inline-block;margin-top:12px;padding:12px 18px;border-radius:12px;background:transparent;border:2px solid var(--accent);color:var(--accent);font-weight:800;text-decoration:none}
-
-    footer{margin-top:18px;text-align:center;opacity:0.9;font-size:13px}
+    footer{width:100%;max-width:1200px;text-align:center;color:rgba(255,255,255,0.75);font-size:13px;padding:18px 0}
 
     /* Responsivo */
     @media (max-width:900px){
       main{grid-template-columns:1fr}
-      .logo{width:56px;height:56px}
-      h1{font-size:22px}
+      header{padding-bottom:12px}
+      .brand h1{font-size:28px}
     }
-
-    /* Pequena animação de brilho nas cartas */
-    .flavor::after{
-      content:"";position:absolute;pointer-events:none;opacity:0;transition:all .45s ease;border-radius:10px}
-    .flavor:hover{transform:translateY(-6px);transition:transform .25s ease}
-
-    /* Badge */
-    .badge{background:rgba(255,255,255,0.08);padding:6px 10px;border-radius:999px;font-weight:700}
-
-    /* Galeria */
-    .gallery{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
-    .thumb{flex:1 1 120px;min-width:90px;border-radius:10px;padding:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));text-align:center}
-    .thumb svg{width:100%;height:100px}
-
   </style>
 </head>
 <body>
-  <div class="card" role="application">
+  <div class="app">
     <header>
       <div class="brand">
-        <div class="logo" aria-hidden="true">B🍰</div>
+        <div class="logo" aria-hidden="true">
+          <!-- pequeno ícone de pote -->
+          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="logo">
+            <rect x="6" y="14" width="52" height="34" rx="8" fill="white" opacity="0.12"/>
+            <rect x="10" y="8" width="44" height="8" rx="4" fill="white" opacity="0.16"/>
+            <circle cx="20" cy="29" r="2" fill="white" opacity="0.9"/>
+            <circle cx="32" cy="29" r="2" fill="white" opacity="0.9"/>
+            <circle cx="44" cy="29" r="2" fill="white" opacity="0.9"/>
+          </svg>
+        </div>
         <div>
-          <h1>Projeto Bolo de Pote</h1>
-          <p class="lead">Receitas, sabores e um pequeno negócio pronto pra rodar — tudo em um arquivo HTML.</p>
+          <h1>delicios cakes</h1>
+          <p class="lead">Bolos de pote artesanais — sabor que fica na memória.</p>
         </div>
       </div>
-
-      <nav>
-        <span class="badge">Delivery • Encomendas</span>
-        <a href="#pedir" class="btn">Fazer Pedido</a>
-      </nav>
+      <div class="controls">
+        <button onclick="document.documentElement.requestFullscreen?.()">Entrar em tela cheia</button>
+        <button class="primary" onclick="window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'})">Ver sabores</button>
+      </div>
     </header>
 
     <main>
-      <section class="hero" aria-labelledby="sobre">
-        <h2 id="sobre">Sobre o projeto</h2>
-        <p>Este é um site único em HTML que você pode hospedar em qualquer lugar (GitHub Pages, Netlify, Vercel ou abrir localmente). Ele foi pensado para ser simples, visual e duradouro — sem dependências externas além da fonte. Personalize sabores, preços e contato facilmente.</p>
+      <section class="hero">
+        <h2>Os melhores bolos de pote — práticos e deliciosos</h2>
+        <small>Escolha um sabor, peça online e receba com carinho.</small>
 
-        <h2 style="margin-top:18px">Sabores populares</h2>
-        <div class="grid-flavors" style="position:relative;margin-top:8px">
+        <div class="grid" style="margin-top:18px">
+          <!-- Card 1 -->
+          <article class="card">
+            <div class="jar" aria-hidden="true">
+              <!-- representação simples do pote -->
+              <svg viewBox="0 0 120 100" width="120" height="100" xmlns="http://www.w3.org/2000/svg">
+                <rect x="18" y="20" rx="10" ry="10" width="84" height="60" fill="white" opacity="0.06"/>
+                <rect x="28" y="10" rx="8" ry="8" width="64" height="14" fill="white" opacity="0.08"/>
+                <rect x="28" y="46" rx="6" ry="6" width="64" height="10" fill="white" opacity="0.12"/>
+              </svg>
+            </div>
+            <div>
+              <h3>Prestígio no Pote</h3>
+              <div class="description">Camadas de bolo de chocolate, brigadeiro e coco ralado. Porção individual.</div>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:auto">
+              <div class="price">R$ 12,00</div>
+              <button onclick="alert('Adicionado ao carrinho: Prestígio no Pote')">Pedir</button>
+            </div>
+          </article>
 
-          <div class="flavor">
-            <h3>Brigadeiro</h3>
-            <p>Creme de chocolate com granulados.</p>
-            <div class="price">R$ 8,00</div>
-          </div>
+          <!-- Card 2 -->
+          <article class="card">
+            <div class="jar" aria-hidden="true">
+              <svg viewBox="0 0 120 100" width="120" height="100" xmlns="http://www.w3.org/2000/svg">
+                <rect x="18" y="20" rx="10" ry="10" width="84" height="60" fill="white" opacity="0.06"/>
+                <rect x="28" y="10" rx="8" ry="8" width="64" height="14" fill="white" opacity="0.08"/>
+                <circle cx="60" cy="48" r="12" fill="white" opacity="0.12"/>
+              </svg>
+            </div>
+            <div>
+              <h3>Morango com Nutella</h3>
+              <div class="description">Bolo branco, creme de morango fresco e toque de Nutella.</div>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:auto">
+              <div class="price">R$ 14,00</div>
+              <button onclick="alert('Adicionado ao carrinho: Morango com Nutella')">Pedir</button>
+            </div>
+          </article>
 
-          <div class="flavor">
-            <h3>Doce de Leite</h3>
-            <p>Camadas generosas de doce de leite.</p>
-            <div class="price">R$ 9,00</div>
-          </div>
-
-          <div class="flavor">
-            <h3>Nutella</h3>
-            <p>Para quem ama avelã e cacau.</p>
-            <div class="price">R$ 11,00</div>
-          </div>
-
-          <div class="flavor">
-            <h3>Churros</h3>
-            <p>Canela, doce de leite e farofa crocante.</p>
-            <div class="price">R$ 9,50</div>
-          </div>
-
+          <!-- Card 3 -->
+          <article class="card">
+            <div class="jar" aria-hidden="true">
+              <svg viewBox="0 0 120 100" width="120" height="100" xmlns="http://www.w3.org/2000/svg">
+                <rect x="18" y="20" rx="10" ry="10" width="84" height="60" fill="white" opacity="0.06"/>
+                <rect x="28" y="10" rx="8" ry="8" width="64" height="14" fill="white" opacity="0.08"/>
+                <rect x="34" y="44" width="52" height="12" rx="6" fill="white" opacity="0.12"/>
+              </svg>
+            </div>
+            <div>
+              <h3>Doce de Leite & Canela</h3>
+              <div class="description">Camadas cremosas com toque de canela e farofa crocante.</div>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:auto">
+              <div class="price">R$ 13,00</div>
+              <button onclick="alert('Adicionado ao carrinho: Doce de Leite & Canela')">Pedir</button>
+            </div>
+          </article>
         </div>
-
-        <h2 style="margin-top:18px">Galeria</h2>
-        <div class="gallery">
-          <div class="thumb">
-            <svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="thumbnail 1">
-              <defs>
-                <linearGradient id="g1" x1="0" x2="1"><stop offset="0" stop-color="#ffd166"/><stop offset="1" stop-color="#ff9a9a"/></linearGradient>
-              </defs>
-              <rect width="200" height="120" rx="10" fill="url(#g1)"/>
-              <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-family="Roboto Slab" font-size="18" fill="#331a00">Bolo de Pote</text>
-            </svg>
-          </div>
-
-          <div class="thumb">
-            <svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="thumbnail 2">
-              <rect width="200" height="120" rx="10" fill="rgba(255,255,255,0.06)"/>
-              <circle cx="60" cy="60" r="36" fill="rgba(255,255,255,0.08)"/>
-              <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-family="Inter" font-size="14" fill="#fff">Sabor: Nutella</text>
-            </svg>
-          </div>
-
-          <div class="thumb">
-            <svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="thumbnail 3">
-              <rect width="200" height="120" rx="10" fill="rgba(255,255,255,0.02)"/>
-              <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-family="Inter" font-size="14">Churros</text>
-            </svg>
-          </div>
-
-        </div>
-
-        <h2 style="margin-top:18px">Receita-base (Rendimento 6 potes médios)</h2>
-        <ol style="margin-top:6px">
-          <li>200 g de biscoito triturado (base)</li>
-          <li>400 g de recheio (brigadeiro/doce de leite)</li>
-          <li>200 ml de chantilly para cobertura</li>
-          <li>Montagem: base, recheio, finalização e resfriar 1 hora</li>
-        </ol>
 
       </section>
 
       <aside class="sidebar">
-        <div class="order-box" id="pedir">
-          <h3>Fazer pedido</h3>
-          <form onsubmit="handleOrder(event)">
-            <label for="nome">Nome</label>
-            <input id="nome" name="nome" type="text" placeholder="Seu nome" required>
-
-            <label for="telefone">Telefone / WhatsApp</label>
-            <input id="telefone" name="telefone" type="tel" placeholder="(99) 9 9999-9999" required>
-
-            <label for="sabor">Sabor</label>
-            <select id="sabor" name="sabor">
-              <option>Brigadeiro</option>
-              <option>Doce de Leite</option>
-              <option>Nutella</option>
-              <option>Churros</option>
-            </select>
-
-            <label for="quant">Quantidade</label>
-            <input id="quant" name="quant" type="text" value="1">
-
-            <label for="obs">Observações</label>
-            <textarea id="obs" name="obs" placeholder="Ex.: sem lactose, para festa, entrega às..."></textarea>
-
-            <button type="submit" class="buy">Enviar pedido</button>
-          </form>
-
-          <p style="margin-top:10px;font-size:13px;opacity:0.9">Ou entre em contato pelo WhatsApp: <strong>(00) 0 0000-0000</strong> (substitua pelo seu número)</p>
+        <h3>Faça seu pedido</h3>
+        <p style="margin:0 0 8px">Escolha os sabores acima e clique em <strong>Pedir</strong>. Para pedidos maiores, entre em contato.</p>
+        <div class="cta">
+          <label for="qtd">Quantidade (unidades):</label>
+          <input id="qtd" type="number" min="1" value="1" style="padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.08);background:transparent;color:#fff" />
+          <button onclick="alert('Pedido enviado! Obrigado por escolher delicios cakes ❤️')" class="primary">Enviar pedido</button>
+          <button onclick="document.getElementById('qtd').value=1">Resetar</button>
         </div>
 
-        <div style="margin-top:14px;padding:12px;border-radius:10px;background:rgba(255,255,255,0.02);font-size:13px">
-          <strong>Dicas para durar:</strong>
-          <ul>
-            <li>Armazene na geladeira até 5 dias.</li>
-            <li>Use potes bem fechados para manter crocância.</li>
-            <li>Ofereça variações sazonais (frutas, crocantes).</li>
-          </ul>
-        </div>
+        <hr style="margin:16px 0;border:none;border-top:1px solid rgba(255,255,255,0.06)"/>
+        <small>Entrega em até 3 dias úteis. Pagamento no cartão ou em dinheiro na entrega.</small>
       </aside>
-
     </main>
 
     <footer>
-      <div>© Projeto Bolo de Pote — Arquivo único em HTML. Salve este arquivo como <code>index.html</code> e faça upload para seu serviço preferido.</div>
+      © <span id="year"></span> delicios cakes — Feito para durar.
     </footer>
   </div>
 
   <script>
-    function handleOrder(e){
-      e.preventDefault();
-      const nome = document.getElementById('nome').value;
-      const tel = document.getElementById('telefone').value;
-      const sabor = document.getElementById('sabor').value;
-      const quant = document.getElementById('quant').value;
-      const obs = document.getElementById('obs').value;
+    // ano dinâmico
+    document.getElementById('year').textContent = new Date().getFullYear();
 
-      const message = `Pedido de ${nome}%0aTelefone: ${tel}%0aSabor: ${sabor}%0aQuantidade: ${quant}%0aObservações: ${obs}`;
-
-      // Abre WhatsApp web (substitua o número abaixo pelo seu) — se preferir, altere para envio por e-mail
-      const whatsappNumber = '00000000000'; // <- coloque seu número sem espaços/formatos, ex: 5591999999999
-      const url = `https://wa.me/${whatsappNumber}?text=${message}`;
-      window.open(url, '_blank');
-    }
+    // pequena proteção para browsers que não suportam requestFullscreen nessa sintaxe
+    (function(){
+      const fsBtn = document.querySelector('button[onclick^="document.documentElement.requestFullscreen"]');
+      if(!fsBtn) return;
+      fsBtn.addEventListener('click', ()=>{
+        const el = document.documentElement;
+        const fn = el.requestFullscreen || el.webkitRequestFullscreen || el.mozRequestFullScreen || el.msRequestFullscreen;
+        if(fn) fn.call(el);
+      });
+    })();
   </script>
 </body>
 </html>
