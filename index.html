@@ -1,55 +1,266 @@
-<!DOCTYPE html>
+<<!doctype html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>Bolos de Pote Online</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>delicios cakes — Bolo de Pote</title>
   <style>
-    body {
-      background-color: purple;
-      color: white;
-      font-family: Arial, sans-serif;
-      text-align: center;
-      margin: 0;
-      padding: 0;
+    :root{
+      --bg1:#4b0073; /* roxo escuro */
+      --bg2:#7b2cbf; /* roxo médio */
+      --glass: rgba(255,255,255,0.08);
+      --accent: #ffd7e2;
+      --card-shadow: 0 8px 30px rgba(0,0,0,0.45);
+      --radius: 16px;
     }
-    header {
-      padding: 20px;
-      background-color: #4b0082;
-      font-size: 28px;
-      font-weight: bold;
+    *{box-sizing:border-box}
+    html,body{
+      height:100%;
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+      background: linear-gradient(135deg,var(--bg1),var(--bg2));
+      color: #fff;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
     }
-    .container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      padding: 20px;
+    /* Página em tela cheia (100vh) */
+    .app{
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:flex-start;
+      padding:32px;
+      gap:24px;
     }
-    .bolo {
-      background: rgba(255,255,255,0.1);
-      border-radius: 12px;
-      margin: 15px;
-      padding: 15px;
-      width: 250px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+    header{
+      width:100%;
+      max-width:1200px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
     }
-    .bolo img {
-      width: 100%;
-      height: auto;
-      border-radius: 12px;
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:16px;
     }
-    .bolo h2 {
-      margin: 10px 0 5px;
+    .logo{
+      width:72px;height:72px;
+      background:linear-gradient(180deg, rgba(255,255,255,0.15), rgba(255,255,255,0.06));
+      border-radius:14px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      box-shadow: var(--card-shadow);
+      flex-shrink:0;
     }
-    .bolo p {
-      font-size: 14px;
-      line-height: 1.5;
+    .logo svg{width:52px;height:52px}
+    h1{font-size:36px;line-height:1;margin:0;text-transform:capitalize;letter-spacing:0.6px}
+    p.lead{margin:0;color:rgba(255,255,255,0.9);opacity:0.95}
+
+    .controls{display:flex;gap:12px;align-items:center}
+    button{
+      background:transparent;
+      color:var(--accent);
+      border:1px solid rgba(255,255,255,0.12);
+      padding:10px 16px;
+      border-radius:12px;
+      font-weight:600;
+      cursor:pointer;
+      backdrop-filter: blur(6px);
+    }
+    button.primary{
+      background:linear-gradient(90deg,#ffd7e2, rgba(255,255,255,0.08));
+      color:#3b0033;
+      border:none;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+    }
+
+    main{
+      width:100%;
+      max-width:1200px;
+      display:grid;
+      grid-template-columns: 1fr 380px;
+      gap:28px;
+      align-items:start;
+      margin-top:8px;
+    }
+    .hero{
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+      border-radius: var(--radius);
+      padding:28px;
+      box-shadow: var(--card-shadow);
+    }
+    .hero h2{font-size:28px;margin:0 0 8px}
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(auto-fill,minmax(220px,1fr));
+      gap:18px;
+      margin-top:18px;
+    }
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:14px;
+      padding:14px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+      min-height:220px;
+    }
+    .jar{
+      width:100%;height:110px;display:flex;align-items:center;justify-content:center;
+    }
+    .card h3{margin:0;font-size:18px}
+    .price{font-weight:800;font-size:18px;color:var(--accent)}
+    .description{font-size:13px;color:rgba(255,255,255,0.85)}
+
+    .sidebar{
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+      border-radius:14px;padding:20px;box-shadow: var(--card-shadow);
+      height:100%;
+    }
+    .cta{display:flex;flex-direction:column;gap:12px}
+    .hero small{color:rgba(255,255,255,0.8)}
+
+    footer{width:100%;max-width:1200px;text-align:center;color:rgba(255,255,255,0.75);font-size:13px;padding:18px 0}
+
+    /* Responsivo */
+    @media (max-width:900px){
+      main{grid-template-columns:1fr}
+      header{padding-bottom:12px}
+      .brand h1{font-size:28px}
     }
   </style>
 </head>
 <body>
-  <header>🍰 Projeto Online - Bolos de Pote</header>
+  <div class="app">
+    <header>
+      <div class="brand">
+        <div class="logo" aria-hidden="true">
+          <!-- pequeno ícone de pote -->
+          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="logo">
+            <rect x="6" y="14" width="52" height="34" rx="8" fill="white" opacity="0.12"/>
+            <rect x="10" y="8" width="44" height="8" rx="4" fill="white" opacity="0.16"/>
+            <circle cx="20" cy="29" r="2" fill="white" opacity="0.9"/>
+            <circle cx="32" cy="29" r="2" fill="white" opacity="0.9"/>
+            <circle cx="44" cy="29" r="2" fill="white" opacity="0.9"/>
+          </svg>
+        </div>
+        <div>
+          <h1>delicios cakes</h1>
+          <p class="lead">Bolos de pote artesanais — sabor que fica na memória.</p>
+        </div>
+      </div>
+      <div class="controls">
+        <button onclick="document.documentElement.requestFullscreen?.()">Entrar em tela cheia</button>
+        <button class="primary" onclick="window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'})">Ver sabores</button>
+      </div>
+    </header>
 
-  <div class="container">
-    <div class="bolo">
-      <img src="https://cdn.pixabay.com/photo/2017/01/26/23/59/cake-2011744_1280.jpg" alt="Bolo de Chocolate">
-      <h2>Bolo de Chocolate</h2>
+    <main>
+      <section class="hero">
+        <h2>Os melhores bolos de pote — práticos e deliciosos</h2>
+        <small>Escolha um sabor, peça online e receba com carinho.</small>
+
+        <div class="grid" style="margin-top:18px">
+          <!-- Card 1 -->
+          <article class="card">
+            <div class="jar" aria-hidden="true">
+              <!-- representação simples do pote -->
+              <svg viewBox="0 0 120 100" width="120" height="100" xmlns="http://www.w3.org/2000/svg">
+                <rect x="18" y="20" rx="10" ry="10" width="84" height="60" fill="white" opacity="0.06"/>
+                <rect x="28" y="10" rx="8" ry="8" width="64" height="14" fill="white" opacity="0.08"/>
+                <rect x="28" y="46" rx="6" ry="6" width="64" height="10" fill="white" opacity="0.12"/>
+              </svg>
+            </div>
+            <div>
+              <h3>Prestígio no Pote</h3>
+              <div class="description">Camadas de bolo de chocolate, brigadeiro e coco ralado. Porção individual.</div>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:auto">
+              <div class="price">R$ 12,00</div>
+              <button onclick="alert('Adicionado ao carrinho: Prestígio no Pote')">Pedir</button>
+            </div>
+          </article>
+
+          <!-- Card 2 -->
+          <article class="card">
+            <div class="jar" aria-hidden="true">
+              <svg viewBox="0 0 120 100" width="120" height="100" xmlns="http://www.w3.org/2000/svg">
+                <rect x="18" y="20" rx="10" ry="10" width="84" height="60" fill="white" opacity="0.06"/>
+                <rect x="28" y="10" rx="8" ry="8" width="64" height="14" fill="white" opacity="0.08"/>
+                <circle cx="60" cy="48" r="12" fill="white" opacity="0.12"/>
+              </svg>
+            </div>
+            <div>
+              <h3>Morango com Nutella</h3>
+              <div class="description">Bolo branco, creme de morango fresco e toque de Nutella.</div>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:auto">
+              <div class="price">R$ 14,00</div>
+              <button onclick="alert('Adicionado ao carrinho: Morango com Nutella')">Pedir</button>
+            </div>
+          </article>
+
+          <!-- Card 3 -->
+          <article class="card">
+            <div class="jar" aria-hidden="true">
+              <svg viewBox="0 0 120 100" width="120" height="100" xmlns="http://www.w3.org/2000/svg">
+                <rect x="18" y="20" rx="10" ry="10" width="84" height="60" fill="white" opacity="0.06"/>
+                <rect x="28" y="10" rx="8" ry="8" width="64" height="14" fill="white" opacity="0.08"/>
+                <rect x="34" y="44" width="52" height="12" rx="6" fill="white" opacity="0.12"/>
+              </svg>
+            </div>
+            <div>
+              <h3>Doce de Leite & Canela</h3>
+              <div class="description">Camadas cremosas com toque de canela e farofa crocante.</div>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:auto">
+              <div class="price">R$ 13,00</div>
+              <button onclick="alert('Adicionado ao carrinho: Doce de Leite & Canela')">Pedir</button>
+            </div>
+          </article>
+        </div>
+
+      </section>
+
+      <aside class="sidebar">
+        <h3>Faça seu pedido</h3>
+        <p style="margin:0 0 8px">Escolha os sabores acima e clique em <strong>Pedir</strong>. Para pedidos maiores, entre em contato.</p>
+        <div class="cta">
+          <label for="qtd">Quantidade (unidades):</label>
+          <input id="qtd" type="number" min="1" value="1" style="padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.08);background:transparent;color:#fff" />
+          <button onclick="alert('Pedido enviado! Obrigado por escolher delicios cakes ❤️')" class="primary">Enviar pedido</button>
+          <button onclick="document.getElementById('qtd').value=1">Resetar</button>
+        </div>
+
+        <hr style="margin:16px 0;border:none;border-top:1px solid rgba(255,255,255,0.06)"/>
+        <small>Entrega em até 3 dias úteis. Pagamento no cartão ou em dinheiro na entrega.</small>
+      </aside>
+    </main>
+
+    <footer>
+      © <span id="year"></span> delicios cakes — Feito para durar.
+    </footer>
+  </div>
+
+  <script>
+    // ano dinâmico
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // pequena proteção para browsers que não suportam requestFullscreen nessa sintaxe
+    (function(){
+      const fsBtn = document.querySelector('button[onclick^="document.documentElement.requestFullscreen"]');
+      if(!fsBtn) return;
+      fsBtn.addEventListener('click', ()=>{
+        const el = document.documentElement;
+        const fn = el.requestFullscreen || el.webkitRequestFullscreen || el.mozRequestFullScreen || el.msRequestFullscreen;
+        if(fn) fn.call(el);
+      });
+    })();
+  </script>
+</body>
+</html>
