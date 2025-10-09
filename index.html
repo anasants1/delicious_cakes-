@@ -2,362 +2,212 @@
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Loja de Vacinas — Sistema Único (HTML)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>delicios cakes — Bolo de Pote</title>
   <style>
-    :root{--bg:#f6f8fb;--card:#ffffff;--muted:#6b7280;--accent:#0ea5a4;--danger:#ef4444;--glass:rgba(255,255,255,0.6)}
+    :root{
+      --bg1:#4b0073; /* roxo escuro */
+      --bg2:#7b2cbf; /* roxo médio */
+      --glass: rgba(255,255,255,0.08);
+      --accent: #ffd7e2;
+      --card-shadow: 0 8px 30px rgba(0,0,0,0.45);
+      --radius: 16px;
+    }
     *{box-sizing:border-box}
-    body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial; background:linear-gradient(180deg,#eef2ff 0%,var(--bg) 100%); margin:0; color:#111827}
-    .wrap{max-width:1100px;margin:28px auto;padding:20px}
-    header{display:flex;gap:16px;align-items:center;justify-content:space-between}
-    h1{font-size:20px;margin:0}
-    p.lead{margin:4px 0 0;color:var(--muted);font-size:13px}
-    .card{background:var(--card);border-radius:12px;padding:16px;box-shadow:0 6px 18px rgba(15,23,42,0.06)}
+    html,body{
+      height:100%;
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+      background: linear-gradient(135deg,var(--bg1),var(--bg2));
+      color: #fff;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+    /* Página em tela cheia (100vh) */
+    .app{
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:flex-start;
+      padding:32px;
+      gap:24px;
+    }
+    header{
+      width:100%;
+      max-width:1200px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:16px;
+    }
+    .logo{
+      width:72px;height:72px;
+      background:linear-gradient(180deg, rgba(255,255,255,0.15), rgba(255,255,255,0.06));
+      border-radius:14px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      box-shadow: var(--card-shadow);
+      flex-shrink:0;
+    }
+    .logo svg{width:52px;height:52px}
+    h1{font-size:36px;line-height:1;margin:0;text-transform:capitalize;letter-spacing:0.6px}
+    p.lead{margin:0;color:rgba(255,255,255,0.9);opacity:0.95}
 
-    .grid{display:grid;gap:16px}
-    .grid.cols-3{grid-template-columns:1fr 380px 200px}
-    @media (max-width:980px){.grid.cols-3{grid-template-columns:1fr 320px}}
-    @media (max-width:760px){.grid.cols-3{grid-template-columns:1fr}header{flex-direction:column;align-items:flex-start}}
+    .controls{display:flex;gap:12px;align-items:center}
+    button{
+      background:transparent;
+      color:var(--accent);
+      border:1px solid rgba(255,255,255,0.12);
+      padding:10px 16px;
+      border-radius:12px;
+      font-weight:600;
+      cursor:pointer;
+      backdrop-filter: blur(6px);
+    }
+    button.primary{
+      background:linear-gradient(90deg,#ffd7e2, rgba(255,255,255,0.08));
+      color:#3b0033;
+      border:none;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+    }
 
-    form.row{display:flex;gap:8px;flex-wrap:wrap}
-    input,select{padding:10px;border-radius:8px;border:1px solid #e6e9ef;background:#fff;min-width:0}
-    button{padding:10px 12px;border-radius:8px;border:0;background:var(--accent);color:white;cursor:pointer}
-    button.ghost{background:transparent;color:var(--accent);border:1px solid rgba(14,165,164,0.12)}
-    button.warn{background:var(--danger)}
+    main{
+      width:100%;
+      max-width:1200px;
+      display:grid;
+      grid-template-columns: 1fr 380px;
+      gap:28px;
+      align-items:start;
+      margin-top:8px;
+    }
+    .hero{
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+      border-radius: var(--radius);
+      padding:28px;
+      box-shadow: var(--card-shadow);
+    }
+    .hero h2{font-size:28px;margin:0 0 8px}
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(auto-fill,minmax(220px,1fr));
+      gap:18px;
+      margin-top:18px;
+    }
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:14px;
+      padding:14px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+      min-height:220px;
+    }
+    .jar{
+      width:100%;height:110px;display:flex;align-items:center;justify-content:center;
+    }
+    .card h3{margin:0;font-size:18px}
+    .price{font-weight:800;font-size:18px;color:var(--accent)}
+    .description{font-size:13px;color:rgba(255,255,255,0.85)}
 
-    table{width:100%;border-collapse:collapse}
-    th,td{padding:10px 8px;text-align:left;border-bottom:1px solid #f1f3f6;font-size:14px}
-    th{color:var(--muted);font-size:12px}
-    tr.critical td{background:linear-gradient(90deg,rgba(239,68,68,0.06),transparent)}
+    .sidebar{
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+      border-radius:14px;padding:20px;box-shadow: var(--card-shadow);
+      height:100%;
+    }
+    .cta{display:flex;flex-direction:column;gap:12px}
+    .hero small{color:rgba(255,255,255,0.8)}
 
-    .controls{display:flex;gap:8px;align-items:center}
-    .small{font-size:13px;padding:6px 8px}
-    .muted{color:var(--muted)}
+    footer{width:100%;max-width:1200px;text-align:center;color:rgba(255,255,255,0.75);font-size:13px;padding:18px 0}
 
-    .badge{display:inline-block;padding:6px 8px;border-radius:999px;background:var(--glass);font-size:12px}
-    .right{text-align:right}
-
-    /* modal */
-    .modal-back{position:fixed;inset:0;background:rgba(2,6,23,0.45);display:none;align-items:center;justify-content:center;padding:20px}
-    .modal{background:var(--card);padding:18px;border-radius:12px;min-width:320px;max-width:480px}
-    .flex{display:flex;gap:8px;align-items:center}
-
-    footer{margin-top:18px;color:var(--muted);font-size:13px}
-    .actions{display:flex;gap:8px;justify-content:flex-end}
-
-    /* tiny responsive tweaks */
-    @media (max-width:520px){th:nth-child(4),td:nth-child(4){display:none}}
+    /* Responsivo */
+    @media (max-width:900px){
+      main{grid-template-columns:1fr}
+      header{padding-bottom:12px}
+      .brand h1{font-size:28px}
+    }
   </style>
 </head>
 <body>
-<div class="wrap">
-  <header>
-    <div>
-      <h1>Loja de Vacinas</h1>
-      <p class="lead">Sistema simples (único arquivo). Cadastre, venda e gere relatório de estoque — dados salvos no navegador.</p>
-    </div>
-    <div class="controls">
-      <span class="badge">LocalStorage</span>
-      <button id="exportCsv" class="small ghost">Exportar CSV</button>
-      <button id="clearAll" class="small ghost">Limpar dados</button>
-    </div>
-  </header>
-
-  <main class="grid cols-3" style="margin-top:16px">
-    <!-- área principal: lista e busca -->
-    <section class="card">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-        <strong>Vacinas cadastradas</strong>
-        <div class="controls">
-          <input id="search" placeholder="Buscar por nome ou fabricante" style="width:260px" />
-          <select id="sort" class="small">
-            <option value="nome">Ordenar: Nome ↑</option>
-            <option value="-nome">Ordenar: Nome ↓</option>
-            <option value="preco">Preço ↑</option>
-            <option value="-preco">Preço ↓</option>
-            <option value="quantidade">Estoque ↑</option>
-            <option value="-quantidade">Estoque ↓</option>
-          </select>
+  <div class="app">
+    <header>
+      <div class="brand">
+        <div class="logo" aria-hidden="true">
+          <!-- pequeno ícone de pote -->
+          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="logo">
+            <rect x="6" y="14" width="52" height="34" rx="8" fill="white" opacity="0.12"/>
+            <rect x="10" y="8" width="44" height="8" rx="4" fill="white" opacity="0.16"/>
+            <circle cx="20" cy="29" r="2" fill="white" opacity="0.9"/>
+            <circle cx="32" cy="29" r="2" fill="white" opacity="0.9"/>
+            <circle cx="44" cy="29" r="2" fill="white" opacity="0.9"/>
+          </svg>
         </div>
-      </div>
-
-      <div style="overflow:auto;max-height:520px">
-        <table id="table">
-          <thead>
-            <tr><th>Vacina</th><th>Fabricante</th><th>Preço (R$)</th><th>Estoque</th><th class="right">Ações</th></tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-      </div>
-
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px">
-        <span id="totalTypes" class="muted">0 produtos</span>
-        <div class="actions">
-          <button id="reportBtn" class="small">Relatório</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- formulário de cadastro -->
-    <aside class="card">
-      <strong>Cadastro de vacina</strong>
-      <form id="form" style="margin-top:12px" autocomplete="off">
-        <div style="display:flex;flex-direction:column;gap:8px">
-          <input id="nome" placeholder="Nome (ex: Gripe)" required />
-          <input id="fabricante" placeholder="Fabricante (ex: Butantan)" required />
-          <input id="preco" type="number" step="0.01" placeholder="Preço (R$)" required />
-          <input id="quantidade" type="number" step="1" placeholder="Quantidade" required />
-          <div style="display:flex;gap:8px">
-            <button id="addBtn" type="submit">Adicionar / Atualizar</button>
-            <button id="resetBtn" type="button" class="ghost">Limpar</button>
-          </div>
-        </div>
-      </form>
-
-      <hr style="margin:12px 0">
-
-      <div>
-        <strong>Venda rápida</strong>
-        <p class="muted" style="margin:6px 0 10px">Selecione uma vacina na tabela e clique em "Vender".</p>
-        <div style="display:grid;gap:8px">
-          <button id="sellSelected" class="small">Vender selecionada</button>
-          <button id="lowStock" class="small ghost">Mostrar estoque baixo</button>
-        </div>
-      </div>
-    </aside>
-
-    <!-- painel resumo -->
-    <aside class="card">
-      <strong>Resumo</strong>
-      <div style="margin-top:12px">
-        <p><span class="muted">Tipos de vacinas:</span> <span id="countTypes">0</span></p>
-        <p><span class="muted">Total em estoque:</span> <span id="countTotal">0</span></p>
-        <p><span class="muted">Valor do estoque (R$):</span> R$ <span id="valueTotal">0.00</span></p>
-      </div>
-
-      <hr style="margin:12px 0">
-      <strong>Importar / Exportar</strong>
-      <div style="margin-top:8px;display:flex;gap:8px">
-        <input id="fileIn" type="file" accept="application/json" />
-      </div>
-      <p class="muted" style="margin-top:8px;font-size:13px">Formato JSON esperado: [{"nome":"...","fabricante":"...","preco":0.0,"quantidade":0}]</p>
-    </aside>
-  </main>
-
-  <footer>
-    <p>Feito como demo — salve o arquivo como <code>loja_vacinas.html</code> e abra no navegador. Os dados ficam no armazenamento local (LocalStorage).</p>
-  </footer>
-</div>
-
-<!-- Modal de venda -->
-<div id="modalBack" class="modal-back">
-  <div class="modal">
-    <h3 id="modalTitle">Vender vacina</h3>
-    <div style="margin-top:8px">
-      <div style="display:flex;gap:8px;align-items:center;justify-content:space-between">
         <div>
-          <div id="mName" style="font-weight:600"></div>
-          <div id="mFab" class="muted" style="font-size:13px"></div>
-        </div>
-        <div class="right">
-          <div class="muted">Preço</div>
-          <div id="mPrice" style="font-weight:600">R$ 0.00</div>
+          <h1>delicios cakes</h1>
+          <p class="lead">Bolos de pote artesanais — sabor que fica na memória.</p>
         </div>
       </div>
-
-      <div style="margin-top:12px;display:flex;gap:8px;align-items:center">
-        <label class="muted">Quantidade:</label>
-        <input id="mQty" type="number" value="1" min="1" style="width:100px;padding:8px;border-radius:8px;border:1px solid #e6e9ef" />
-        <div style="flex:1;text-align:right">
-          <button id="confirmSell">Confirmar venda</button>
-          <button id="cancelSell" class="ghost">Cancelar</button>
-        </div>
+      <div class="controls">
+        <button onclick="document.documentElement.requestFullscreen?.()">Entrar em tela cheia</button>
+        <button class="primary" onclick="window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'})">Ver sabores</button>
       </div>
-    </div>
-  </div>
-</div>
+    </header>
 
-<script>
-// Loja de Vacinas — JS
-const STORAGE_KEY = 'loja_vacinas_v1'
-let vacinas = []
-let selectedIndex = null
+    <main>
+      <section class="hero">
+        <h2>Os melhores bolos de pote — práticos e deliciosos</h2>
+        <small>Escolha um sabor, peça online e receba com carinho.</small>
 
-// helpers
-const qs = s => document.querySelector(s)
-const qsa = s => Array.from(document.querySelectorAll(s))
-const fmt = n => Number(n).toFixed(2)
+        <div class="grid" style="margin-top:18px">
+          <!-- Card 1 -->
+          <article class="card">
+            <div class="jar" aria-hidden="true">
+              <!-- representação simples do pote -->
+              <svg viewBox="0 0 120 100" width="120" height="100" xmlns="http://www.w3.org/2000/svg">
+                <rect x="18" y="20" rx="10" ry="10" width="84" height="60" fill="white" opacity="0.06"/>
+                <rect x="28" y="10" rx="8" ry="8" width="64" height="14" fill="white" opacity="0.08"/>
+                <rect x="28" y="46" rx="6" ry="6" width="64" height="10" fill="white" opacity="0.12"/>
+              </svg>
+            </div>
+            <div>
+              <h3>Prestígio no Pote</h3>
+              <div class="description">Camadas de bolo de chocolate, brigadeiro e coco ralado. Porção individual.</div>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:auto">
+              <div class="price">R$ 12,00</div>
+              <button onclick="alert('Adicionado ao carrinho: Prestígio no Pote')">Pedir</button>
+            </div>
+          </article>
 
-function save(){ localStorage.setItem(STORAGE_KEY, JSON.stringify(vacinas)) }
-function load(){ try{ const raw = localStorage.getItem(STORAGE_KEY); vacinas = raw? JSON.parse(raw): []; }catch(e){ vacinas=[] }}
+          <!-- Card 2 -->
+          <article class="card">
+            <div class="jar" aria-hidden="true">
+              <svg viewBox="0 0 120 100" width="120" height="100" xmlns="http://www.w3.org/2000/svg">
+                <rect x="18" y="20" rx="10" ry="10" width="84" height="60" fill="white" opacity="0.06"/>
+                <rect x="28" y="10" rx="8" ry="8" width="64" height="14" fill="white" opacity="0.08"/>
+                <circle cx="60" cy="48" r="12" fill="white" opacity="0.12"/>
+              </svg>
+            </div>
+            <div>
+              <h3>Morango com Nutella</h3>
+              <div class="description">Bolo branco, creme de morango fresco e toque de Nutella.</div>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:auto">
+              <div class="price">R$ 14,00</div>
+              <button onclick="alert('Adicionado ao carrinho: Morango com Nutella')">Pedir</button>
+            </div>
+          </article>
 
-function uid(){ return Math.random().toString(36).slice(2,9) }
-
-function renderTable(){
-  const tbody = qs('#table tbody'); tbody.innerHTML=''
-  const search = qs('#search').value.trim().toLowerCase()
-  const sortVal = qs('#sort').value
-  let list = vacinas.slice()
-  if(search){ list = list.filter(v=> v.nome.toLowerCase().includes(search) || v.fabricante.toLowerCase().includes(search)) }
-  // sort
-  const dir = sortVal.startsWith('-')? -1:1
-  const key = sortVal.replace('-', '')
-  list.sort((a,b)=>{
-    if(key==='nome' || key==='fabricante') return a[key].localeCompare(b[key]) * dir
-    return (a[key]-b[key]) * dir
-  })
-
-  list.forEach((v,idx)=>{
-    const tr = document.createElement('tr')
-    if(v.quantidade<=2) tr.classList.add('critical')
-    tr.innerHTML = `
-      <td>${escapeHtml(v.nome)}</td>
-      <td>${escapeHtml(v.fabricante)}</td>
-      <td>R$ ${fmt(v.preco)}</td>
-      <td>${v.quantidade}</td>
-      <td class="right">
-        <button data-idx="${idx}" class="small" onclick="editVacina(${idx})">Editar</button>
-        <button data-idx="${idx}" class="small ghost" onclick="openSell(${idx})">Vender</button>
-        <button data-idx="${idx}" class="small" onclick="removeVacina(${idx})">Remover</button>
-      </td>`
-    tbody.appendChild(tr)
-  })
-  qs('#totalTypes').textContent = list.length + (list.length===1? ' produto':' produtos')
-  updateResumo()
-}
-
-function updateResumo(){
-  const types = vacinas.length
-  const totalQty = vacinas.reduce((s,v)=>s+Number(v.quantidade),0)
-  const value = vacinas.reduce((s,v)=>s + Number(v.quantidade)*Number(v.preco),0)
-  qs('#countTypes').textContent = types
-  qs('#countTotal').textContent = totalQty
-  qs('#valueTotal').textContent = fmt(value)
-}
-
-function addOrUpdate(e){
-  e && e.preventDefault()
-  const nome = qs('#nome').value.trim();
-  const fabricante = qs('#fabricante').value.trim();
-  const preco = Number(qs('#preco').value || 0)
-  const quantidade = Number(qs('#quantidade').value || 0)
-  if(!nome||!fabricante||preco<=0||quantidade<0){ alert('Preencha os campos corretamente. Preço deve ser > 0.'); return }
-
-  // se existir vacina com mesmo nome+fabricante, atualiza
-  const exists = vacinas.findIndex(v=> v.nome.toLowerCase()===nome.toLowerCase() && v.fabricante.toLowerCase()===fabricante.toLowerCase())
-  if(exists>=0){
-    vacinas[exists].preco = preco
-    vacinas[exists].quantidade = Number(vacinas[exists].quantidade) + quantidade
-    alert('Atualizado estoque da vacina existente.')
-  } else {
-    vacinas.push({id:uid(), nome, fabricante, preco, quantidade})
-    alert('Vacina adicionada com sucesso!')
-  }
-  save(); renderTable(); qs('#form').reset()
-}
-
-function editVacina(i){
-  const v = vacinas[i]
-  if(!v) return
-  qs('#nome').value = v.nome
-  qs('#fabricante').value = v.fabricante
-  qs('#preco').value = v.preco
-  qs('#quantidade').value = v.quantidade
-}
-
-function removeVacina(i){
-  if(!confirm('Remover vacina?')) return
-  vacinas.splice(i,1); save(); renderTable()
-}
-
-// venda
-function openSell(idx){
-  selectedIndex = idx
-  const v = vacinas[idx]
-  if(!v){ alert('Vacina não encontrada'); return }
-  qs('#mName').textContent = v.nome
-  qs('#mFab').textContent = v.fabricante
-  qs('#mPrice').textContent = 'R$ ' + fmt(v.preco)
-  qs('#mQty').value = 1
-  qs('#modalBack').style.display = 'flex'
-}
-function closeModal(){ qs('#modalBack').style.display = 'none'; selectedIndex = null }
-function confirmSell(){
-  const qty = Number(qs('#mQty').value || 1)
-  const idx = selectedIndex
-  if(idx==null) return
-  const v = vacinas[idx]
-  if(qty<=0 || qty>v.quantidade){ alert('Quantidade inválida ou estoque insuficiente'); return }
-  v.quantidade -= qty
-  const total = qty * v.preco
-  alert(`Venda realizada: ${qty}x ${v.nome}\nTotal: R$ ${fmt(total)}`)
-  save(); renderTable(); closeModal()
-}
-
-// helpers: CSV export
-function exportCSV(){
-  if(vacinas.length===0){ alert('Nenhuma vacina para exportar'); return }
-  const rows = [['nome','fabricante','preco','quantidade']]
-  vacinas.forEach(v=> rows.push([v.nome,v.fabricante,Number(v.preco),Number(v.quantidade)]))
-  const csv = rows.map(r=> r.map(cell=> '"'+String(cell).replace(/"/g,'""')+'"').join(',')).join('\n')
-  const blob = new Blob([csv],{type:'text/csv;charset=utf-8;'});
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a'); a.href = url; a.download = 'vacinas.csv'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url)
-}
-
-// import JSON file
-qs('#fileIn').addEventListener('change', e=>{
-  const f = e.target.files[0]; if(!f) return
-  const reader = new FileReader();
-  reader.onload = ev=>{
-    try{ const data = JSON.parse(ev.target.result);
-      if(!Array.isArray(data)) throw new Error('Formato inválido')
-      // validar e mesclar
-      data.forEach(item=>{
-        if(item.nome && item.fabricante && item.preco!=null && item.quantidade!=null){
-          const exists = vacinas.findIndex(v=> v.nome.toLowerCase()===item.nome.toLowerCase() && v.fabricante.toLowerCase()===item.fabricante.toLowerCase())
-          if(exists>=0){ vacinas[exists].quantidade = Number(vacinas[exists].quantidade) + Number(item.quantidade)
-            vacinas[exists].preco = Number(item.preco)
-          } else { vacinas.push({id:uid(), nome:item.nome, fabricante:item.fabricante, preco:Number(item.preco), quantidade:Number(item.quantidade)}) }
-        }
-      })
-      save(); renderTable(); alert('Arquivo importado com sucesso')
-    }catch(err){ alert('Erro ao importar: '+err.message) }
-  }
-  reader.readAsText(f)
-})
-
-// misc
-function showLowStock(){ const low = vacinas.filter(v=> v.quantidade<=2); if(low.length===0) return alert('Nenhuma vacina com estoque baixo (<=2)'); alert('Estoque baixo:\n'+ low.map(v=> `${v.nome} (${v.fabricante}) — ${v.quantidade}`).join('\n')) }
-
-function clearAll(){ if(!confirm('Apagar todos os dados? Esta ação não pode ser desfeita.')) return; vacinas=[]; save(); renderTable() }
-
-function escapeHtml(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') }
-
-// eventos
-qs('#form').addEventListener('submit', addOrUpdate)
-qs('#resetBtn').addEventListener('click', ()=>qs('#form').reset())
-qs('#search').addEventListener('input', renderTable)
-qs('#sort').addEventListener('change', renderTable)
-qs('#exportCsv').addEventListener('click', exportCSV)
-qs('#clearAll').addEventListener('click', clearAll)
-qs('#sellSelected').addEventListener('click', ()=>{
-  if(selectedIndex==null){ alert('Selecione uma vacina na tabela clicando em "Vender" ao lado do produto.'); return }
-  openSell(selectedIndex)
-})
-qs('#lowStock').addEventListener('click', showLowStock)
-qs('#reportBtn').addEventListener('click', ()=>{
-  const totalQtd = vacinas.reduce((s,v)=>s+Number(v.quantidade),0)
-  const totalVal = vacinas.reduce((s,v)=>s + Number(v.quantidade)*Number(v.preco),0)
-  alert(`Relatório de estoque:\nTipos: ${vacinas.length}\nTotal de unidades: ${totalQtd}\nValor total: R$ ${fmt(totalVal)}`)
-})
-qs('#modalBack').addEventListener('click', e=>{ if(e.target.id==='modalBack') closeModal() })
-qs('#cancelSell').addEventListener('click', closeModal)
-qs('#confirmSell').addEventListener('click', confirmSell)
-
-// inicialização
-load(); renderTable();
-
-</script>
-</body>
-</html>
+          <!-- Card 3 -->
+          <article class="card">
+            <div class="jar" aria-hidden="true">
+              <svg viewBox="0 0 120 100" width="120" height="100" xmlns="http://www.w3.org/2000/svg">
+                <rect x="18" y="20" rx="10" ry="10" width="84" height="60" fill="white" opacity="0.06"/>
+                <rect x="28" y="10" rx="8" ry="8" width="64"
